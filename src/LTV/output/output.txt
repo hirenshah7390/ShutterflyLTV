@@ -1,0 +1,7 @@
+CustomerId: 16f55c7d8f42, LTV: 6240, noOfWeeks: 1
+CustomerId: 97f55c8d8f42, LTV: 3466, noOfWeeks: 3
+CustomerId: 96f55c7d8f42, LTV: 2080, noOfWeeks: 3
+CustomerId: 66f55c7d8f42, LTV: 4333, noOfWeeks: 3
+CustomerId: 96f56c7d8a42, LTV: 3120, noOfWeeks: 2
+CustomerId: 97f55c7d8f42, LTV: 7800, noOfWeeks: 2
+CustomerId: 96f55c7d8a42, LTV: 3120, noOfWeeks: 2
