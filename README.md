@@ -5,10 +5,15 @@ Shutterfly screening test
 Class files
 
 •	Start:- Contains main method and json parsing
+
 •	Customer:- class for customer
+
 •	SiteVisit:- class for site visit.
+
 •	Order:-  class for order.
+
 •	Image:- class for image.
+
 •	countLTV:- Contains methods for continuation calculation of LTV and maintaining in memory storage.
 
 Dates:
