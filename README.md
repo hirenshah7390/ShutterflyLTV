@@ -14,7 +14,7 @@ Class files
 
 •	Image:- class for image.
 
-•	countLTV:- Contains methods for continuation calculation of LTV and maintaining in memory storage.
+•	countLTV:- Contains methods for continuos calculation of average LTV for each sutomer and save top 10 with highest LTV. It does also maintains in memory storage.
 
 Dates:
 
