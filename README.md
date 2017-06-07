@@ -24,7 +24,7 @@ Dates:
 
 Complexity:
 
-•	I have used HasMap for storing the in memory data so that way complexity could be o(1) in most cases except some places where I am not searching by key. Moreover, filtering list to restrict it to current week while calculating LTV to reduce number of iterations significantly. Excluding customers having first visit in future after current week to again reduce number of iterations increases performance of the method. 
+•	I have used HasMap for storing the in memory data so that way complexity could be o(1) in most cases except some places where I am not searching by key. Filtering list to restrict it for cusotomes visited this week or having atleast 1 visit prior to this week while calculating LTV to reduce number of iterations significantly. Moreover, excluding customers having first visit in future after current week to  reduce number of iterations to increase performance is keen to this solution. 
 
-•	This solution has been made considering small to medium size input. In future for large amount of input, we can store data to external drive or database before processing or else we can use big data technology like apache spark having RDD (resilient distributed dataframe) which distributes data among cluster nodes and process them on multiple machine yet in memory which is extremely fast.
+•	This solution has been made considering small to medium size input. In future for large amount of input, we can store data to external drive or database before processing or else if we process this in stream, we can use big data technology like apache spark having RDD (resilient distributed dataframe) which distributes data among cluster nodes and process them on multiple machines parralally yet in-memory which is extremely fast and efficient.
 
