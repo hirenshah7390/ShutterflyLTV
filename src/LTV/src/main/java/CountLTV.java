@@ -77,23 +77,23 @@ public class CountLTV {
            list of customers who have visited store at least once before current week or during this week
            to exclude remaining customers having first visit after this week for LTV calculation
             */
-           HashMap<String, Customer> all_visited_Customers = new HashMap(D.entrySet().stream()
+           HashMap<String, Customer> all_visited_Customers = new HashMap(D.entrySet().stream().parallel()
                    .filter(cv -> !cv.getValue().First_Visit_Date.after(week_end_date))
                    .collect(Collectors.toMap(m -> m.getKey(), m -> m.getValue()))
            );
 
            //List of customer who visited just during current week.
-           matchingCustomers_thisWeek = CustomerList.entrySet().stream()
+           matchingCustomers_thisWeek = CustomerList.entrySet().stream().parallel()
                    .filter(cv -> !cv.getValue().event_time.before(week_start_date) && !cv.getValue().event_time.after(week_end_date))
                    .collect(Collectors.toMap(m -> m.getKey(), m -> m.getValue()));
 
            //filter to find all matching visits for current week
-           matchingVisits_thisWeek = SiteVisitList.entrySet().stream()
+           matchingVisits_thisWeek = SiteVisitList.entrySet().stream().parallel()
                    .filter(cv -> !cv.getValue().event_time.before(week_start_date) && !cv.getValue().event_time.after(week_end_date))
                    .collect(Collectors.toMap(m -> m.getKey(), m -> m.getValue()));
 
            //filter to find all matching orders for current week
-           matchingOrders_thisWeek = OrderList.entrySet().stream()
+           matchingOrders_thisWeek = OrderList.entrySet().stream().parallel()
                    .filter(cv -> !cv.getValue().event_time.before(week_start_date) && !cv.getValue().event_time.after(week_end_date))
                    .collect(Collectors.toMap(m -> m.getKey(), m -> m.getValue()));
 
@@ -114,12 +114,12 @@ public class CountLTV {
                Cust_Value.totalWeeks += 1;
 
                //total orders of this customer in current week
-               Map<String, Order> totalOrders = matchingOrders_thisWeek.entrySet().stream()
+               Map<String, Order> totalOrders = matchingOrders_thisWeek.entrySet().stream().parallel()
                        .filter(f -> f.getValue().customerid.equals(Cust_key))
                        .collect(Collectors.toMap(m -> m.getKey(), m -> m.getValue()));
 
                //Order with highest spending
-               Order highestOrder = totalOrders.entrySet().stream()
+               Order highestOrder = totalOrders.entrySet().stream().parallel()
                        .max((o1, o2) -> (o1.getValue().amount - o2.getValue().amount))
                        .get().getValue();
 
@@ -127,7 +127,7 @@ public class CountLTV {
                max_expenditures_this_week += highestOrder.amount;
 
                //calculating total visit for this customer
-               max_visits_this_week += toIntExact(matchingVisits_thisWeek.entrySet().stream()
+               max_visits_this_week += toIntExact(matchingVisits_thisWeek.entrySet().stream().parallel()
                        .filter(f -> f.getValue().customer_id.equals(Cust_key))
                        .count());
 
@@ -175,7 +175,7 @@ public class CountLTV {
         PrintWriter w = new PrintWriter(fos);
 
         //Finding top 10 customer and storing in o/p file
-        CustomerList.entrySet().stream()
+        CustomerList.entrySet().stream().parallel()
                    .sorted(Map.Entry.<String, Customer>comparingByValue((k, v) -> v.LTV).reversed())
                    .limit(10)
                    .forEach(l -> w.write("CustomerId: " +l.getValue().key + ", LTV: " + l.getValue().LTV + ", noOfWeeks: " + l.getValue().totalWeeks + "\n"));
